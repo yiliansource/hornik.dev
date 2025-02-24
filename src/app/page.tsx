@@ -23,6 +23,7 @@ export default function Home() {
                         width={500}
                         height={500}
                         draggable={false}
+                        priority
                     />
                 </div>
                 <div className="absolute w-[700px] h-[150px] background-zigzag -z-10 bottom-[130px] right-0 -translate-y-1/2"></div>
