@@ -1,7 +1,7 @@
+import clsx from "clsx";
 import type { Metadata } from "next";
 import { Bitter, Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import clsx from "clsx";
+import "./globals.scss";
 
 const bitter = Bitter({
     variable: "--font-bitter",
@@ -17,6 +17,11 @@ const geistMono = Geist_Mono({
     variable: "--font-geist-mono",
     subsets: ["latin"],
 });
+
+// const lexend = Lexend({
+//     variable: "--font-lexend",
+//     subsets: ["latin"],
+// });
 
 export const metadata: Metadata = {
     title: "Home - Ian Hornik",
@@ -43,9 +48,7 @@ export default function RootLayout({
         <html lang="en">
             <body
                 className={clsx(
-                    bitter.variable,
-                    geistSans.variable,
-                    geistMono.variable,
+                    ...[bitter, geistSans, geistMono].map((f) => f.variable),
                     "antialiased",
                     "flex flex-col min-h-screen",
                 )}
@@ -66,9 +69,7 @@ export default function RootLayout({
                         </nav> */}
                     </div>
                 </header>
-                <main className="flex-1 mx-auto w-full max-w-5xl">
-                    {children}
-                </main>
+                <main className="flex-1 mx-auto w-full max-w-5xl">{children}</main>
                 <footer></footer>
             </body>
         </html>
