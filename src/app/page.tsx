@@ -3,10 +3,12 @@
 import { MouseParallax } from "@/mouse-parallax";
 import Image from "next/image";
 
+import PortraitImage from "@/assets/img/me.png";
+
 export default function Home() {
     return (
         <div className="px-4 font-[family-name:var(--font-geist-sans)]">
-            <div className="relative flex flex-row py-32 items-center">
+            <div className="relative flex flex-row py-32 items-center select-none">
                 <div className="font-[family-name:var(--font-bitter)] basis-[550px]">
                     <MouseParallax factor={-1 / 80}>
                         <p className="mb-6 text-[80px] leading-[1.0] text-stroke-thick">
@@ -22,13 +24,12 @@ export default function Home() {
                 <div className="hidden md:block ml-auto mr-[100px] mb-[-20px]">
                     <MouseParallax factor={-1 / 80}>
                         <Image
-                            className="brightness-110 bg-wave-clip"
-                            src="/me.png"
-                            alt="Me"
+                            src={PortraitImage}
+                            alt="Me!"
                             width={500}
                             height={500}
-                            draggable={false}
                             quality={100}
+                            draggable={false}
                             priority
                         />
                     </MouseParallax>
@@ -44,6 +45,7 @@ export default function Home() {
                                     width={22.93}
                                     height={22.93}
                                     patternUnits="userSpaceOnUse"
+                                    patternTransform="scale(0.75)"
                                 >
                                     <polygon fill="#aadcec" points="0 8.18 14.75 22.93 22.74 22.93 0 0.19 0 8.18" />
                                     <polygon fill="#aadcec" points="22.93 8.37 22.93 0.38 22.56 0 14.56 0 22.93 8.37" />

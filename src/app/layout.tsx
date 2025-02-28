@@ -50,7 +50,7 @@ export default function RootLayout({
                 className={clsx(
                     ...[bitter, geistSans, geistMono].map((f) => f.variable),
                     "antialiased",
-                    "flex flex-col min-h-screen overflow-hidden",
+                    "flex flex-col min-h-screen overflow-x-hidden overflow-y-auto",
                 )}
             >
                 <header className="h-[64px] flex flex-row items-center mx-auto w-full max-w-6xl">

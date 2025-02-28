@@ -11,8 +11,6 @@ export function MouseParallax({ factor = -1 / 100, children }: React.PropsWithCh
     const mousePosition = useMousePosition();
     const isClient = useIsClient();
 
-    // disable parallax on ssr and mobile (touch) devices
-    // TODO: this creates an error with hydration -- probably better to only lazily render on client
     if (typeof window === "undefined" || !isClient || isTouchDevice()) return children;
 
     const relX = (mousePosition.x ?? 0) - (window?.innerWidth ?? 0) / 2;
