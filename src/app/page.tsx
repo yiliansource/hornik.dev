@@ -28,6 +28,7 @@ export default function Home() {
                             width={500}
                             height={500}
                             draggable={false}
+                            quality={100}
                             priority
                         />
                     </MouseParallax>
