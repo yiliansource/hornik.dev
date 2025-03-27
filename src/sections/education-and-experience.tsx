@@ -2,11 +2,13 @@
 
 import { Badge } from "@/components/badge";
 import { useHover } from "@/lib/use-hover";
+import { useIsMobile } from "@/lib/use-is-mobile";
 import { motion } from "motion/react";
 import { useRef } from "react";
 import { loremIpsum } from "react-lorem-ipsum";
 
 export function ExperienceSection() {
+    const isMobile = useIsMobile();
     const scrollContainerRef = useRef<HTMLDivElement>(null!);
 
     const experienceLabelRef = useRef<HTMLElement>(null!);
@@ -26,7 +28,7 @@ export function ExperienceSection() {
     const INACTIVE_OPACITY = 0.2;
 
     return (
-        <section id="education-and-experience" className="max-w-[calc(100vw-12px*2)] px-3">
+        <section id="education-and-experience" className="max-w-[calc(100vw-12px*2)] px-2">
             <div className="flex snap-x snap-mandatory flex-row overflow-x-auto" ref={scrollContainerRef}>
                 <div className="relative shrink-0 basis-[300px] snap-center snap-always">
                     <div className="absolute z-20 flex h-80 max-w-full items-center justify-center">
@@ -56,7 +58,9 @@ export function ExperienceSection() {
                     <motion.div
                         className="flex flex-col gap-8"
                         ref={experienceTimelineRef}
-                        onClick={() => educationTimelineRef.current.scrollIntoView({ behavior: "smooth" })}
+                        onClick={() =>
+                            isMobile && scrollContainerRef.current.scrollTo({ left: 300 + 24, behavior: "smooth" })
+                        }
                         animate={{ opacity: isHoveringEducation ? INACTIVE_OPACITY : 1 }}
                     >
                         {experience.map((t) => (
@@ -103,7 +107,7 @@ export function ExperienceSection() {
                     <motion.div
                         className="flex flex-col gap-8"
                         ref={educationTimelineRef}
-                        onClick={() => experienceTimelineRef.current.scrollIntoView({ behavior: "smooth" })}
+                        onClick={() => isMobile && scrollContainerRef.current.scrollTo({ left: 0, behavior: "smooth" })}
                         animate={{ opacity: isHoveringExperience ? INACTIVE_OPACITY : 1 }}
                     >
                         {education.map((t) => (
