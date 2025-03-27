@@ -25,117 +25,115 @@ export function ExperienceSection() {
 
     return (
         <section id="education-and-experience" className="max-w-[calc(100vw-12px*2)]">
-            <div className="overflow-x-auto px-4">
-                <div className="grid w-[660px] grid-cols-[1fr_20px_1fr] gap-4">
-                    <div className="relative">
-                        <div className="absolute z-20 flex h-80 max-w-full items-center justify-center">
-                            <p className="flex flex-wrap text-5xl font-semibold select-none">
-                                <motion.span
-                                    animate={{ opacity: isHoveringExperience ? INACTIVE_OPACITY : 1 }}
-                                    ref={educationLabelRef}
-                                >
-                                    Education
-                                </motion.span>
-                                <motion.span
-                                    animate={{
-                                        opacity: isHoveringEducation || isHoveringExperience ? INACTIVE_OPACITY : 1,
-                                    }}
-                                    className="mx-3 font-thin"
-                                >
-                                    &
-                                </motion.span>
-                                <motion.span
-                                    animate={{ opacity: isHoveringEducation ? INACTIVE_OPACITY : 1 }}
-                                    ref={experienceLabelRef}
-                                >
-                                    Experience
-                                </motion.span>
-                            </p>
-                        </div>
-                        <motion.div
-                            className="flex flex-col gap-8"
-                            ref={experienceTimelineRef}
-                            animate={{ opacity: isHoveringEducation ? INACTIVE_OPACITY : 1 }}
-                        >
-                            {experience.map((t) => (
-                                <div
-                                    key={t.title}
-                                    className="relative flex flex-col py-2"
-                                    style={{ marginTop: t.mt ? t.mt : 0 }}
-                                >
-                                    <div className="flex flex-row justify-end gap-1 text-sm font-semibold text-zinc-600">
-                                        <span>{t.from}</span>
-                                        {t.to && (
-                                            <>
-                                                <span>&mdash;</span>
-                                                <span>{t.to}</span>
-                                            </>
-                                        )}
-                                    </div>
-                                    <div>
-                                        <div className="relative">
-                                            <div className="absolute top-1/2 right-[-26px] -translate-y-1/2 border-8 border-l-0 border-t-transparent border-r-zinc-800 border-b-transparent"></div>
-                                            <p className="mb-2 text-right font-semibold">{t.title}</p>
-                                        </div>
-                                        <div className="mb-2 text-right text-sm text-zinc-400">{t.content}</div>
-                                        {t.tags && (
-                                            <div className="flex flex-row flex-wrap justify-end gap-1">
-                                                {t.tags.map((t) => (
-                                                    <Badge key={t}>{t}</Badge>
-                                                ))}
-                                            </div>
-                                        )}
-                                    </div>
+            <div className="flex snap-x snap-mandatory flex-row overflow-x-auto">
+                <div className="relative shrink-0 basis-[300px] snap-center snap-always">
+                    <div className="absolute z-20 flex h-80 max-w-full items-center justify-center">
+                        <p className="flex flex-wrap text-5xl font-semibold select-none">
+                            <motion.span
+                                animate={{ opacity: isHoveringExperience ? INACTIVE_OPACITY : 1 }}
+                                ref={educationLabelRef}
+                            >
+                                Education
+                            </motion.span>
+                            <motion.span
+                                animate={{
+                                    opacity: isHoveringEducation || isHoveringExperience ? INACTIVE_OPACITY : 1,
+                                }}
+                                className="mx-3 font-thin"
+                            >
+                                &
+                            </motion.span>
+                            <motion.span
+                                animate={{ opacity: isHoveringEducation ? INACTIVE_OPACITY : 1 }}
+                                ref={experienceLabelRef}
+                            >
+                                Experience
+                            </motion.span>
+                        </p>
+                    </div>
+                    <motion.div
+                        className="flex flex-col gap-8"
+                        ref={experienceTimelineRef}
+                        animate={{ opacity: isHoveringEducation ? INACTIVE_OPACITY : 1 }}
+                    >
+                        {experience.map((t) => (
+                            <div
+                                key={t.title}
+                                className="relative flex flex-col py-2"
+                                style={{ marginTop: t.mt ? t.mt : 0 }}
+                            >
+                                <div className="flex flex-row justify-end gap-1 text-sm font-semibold text-zinc-600">
+                                    <span>{t.from}</span>
+                                    {t.to && (
+                                        <>
+                                            <span>&mdash;</span>
+                                            <span>{t.to}</span>
+                                        </>
+                                    )}
                                 </div>
-                            ))}
-                        </motion.div>
-                    </div>
-                    <div className="relative">
-                        <div className="absolute left-1/2 h-8 w-px border-l border-dashed border-zinc-800"></div>
-                        <div className="absolute left-1/2 h-full py-8">
-                            <div className="h-full border-l border-zinc-800"></div>
-                        </div>
-                        <div className="absolute bottom-0 left-1/2 h-8 w-px border-l border-dashed border-zinc-800"></div>
-                    </div>
-                    <div>
-                        <motion.div
-                            className="flex flex-col gap-8"
-                            ref={educationTimelineRef}
-                            animate={{ opacity: isHoveringExperience ? INACTIVE_OPACITY : 1 }}
-                        >
-                            {education.map((t) => (
-                                <div
-                                    key={t.title}
-                                    className="relative flex flex-col py-2"
-                                    style={{ marginTop: t.mt ? t.mt : 0 }}
-                                >
-                                    <div className="flex flex-row gap-1 text-sm font-semibold text-zinc-600">
-                                        <span>{t.from}</span>
-                                        {t.to && (
-                                            <>
-                                                <span>&mdash;</span>
-                                                <span>{t.to}</span>
-                                            </>
-                                        )}
+                                <div>
+                                    <div className="relative">
+                                        <div className="absolute top-1/2 right-[-25px] -translate-y-1/2 border-8 border-l-0 border-t-transparent border-r-zinc-800 border-b-transparent"></div>
+                                        <p className="mb-2 text-right font-semibold">{t.title}</p>
                                     </div>
-                                    <div>
-                                        <div className="relative">
-                                            <div className="absolute top-1/2 left-[-25px] -translate-y-1/2 border-8 border-r-0 border-t-transparent border-b-transparent border-l-zinc-800"></div>
-                                            <p className="mb-2 font-semibold">{t.title}</p>
+                                    <div className="mb-2 text-right text-sm text-zinc-400">{t.content}</div>
+                                    {t.tags && (
+                                        <div className="flex flex-row flex-wrap justify-end gap-1">
+                                            {t.tags.map((t) => (
+                                                <Badge key={t}>{t}</Badge>
+                                            ))}
                                         </div>
-                                        <div className="mb-4 text-sm text-zinc-400">{t.content}</div>
-                                        {t.tags && (
-                                            <div className="flex flex-row gap-1">
-                                                {t.tags.map((t) => (
-                                                    <Badge key={t}>{t}</Badge>
-                                                ))}
-                                            </div>
-                                        )}
-                                    </div>
+                                    )}
                                 </div>
-                            ))}
-                        </motion.div>
+                            </div>
+                        ))}
+                    </motion.div>
+                </div>
+                <div className="relative mx-6">
+                    <div className="absolute left-1/2 h-8 w-px border-l border-dashed border-zinc-800"></div>
+                    <div className="absolute left-1/2 h-full py-8">
+                        <div className="h-full border-l border-zinc-800"></div>
                     </div>
+                    <div className="absolute bottom-0 left-1/2 h-8 w-px border-l border-dashed border-zinc-800"></div>
+                </div>
+                <div className="relative shrink-0 basis-[300px] snap-center snap-always pt-4">
+                    <motion.div
+                        className="flex flex-col gap-8"
+                        ref={educationTimelineRef}
+                        animate={{ opacity: isHoveringExperience ? INACTIVE_OPACITY : 1 }}
+                    >
+                        {education.map((t) => (
+                            <div
+                                key={t.title}
+                                className="relative flex flex-col py-2"
+                                style={{ marginTop: t.mt ? t.mt : 0 }}
+                            >
+                                <div className="flex flex-row gap-1 text-sm font-semibold text-zinc-600">
+                                    <span>{t.from}</span>
+                                    {t.to && (
+                                        <>
+                                            <span>&mdash;</span>
+                                            <span>{t.to}</span>
+                                        </>
+                                    )}
+                                </div>
+                                <div>
+                                    <div className="relative">
+                                        <div className="absolute top-1/2 left-[-24px] -translate-y-1/2 border-8 border-r-0 border-t-transparent border-b-transparent border-l-zinc-800"></div>
+                                        <p className="mb-2 font-semibold">{t.title}</p>
+                                    </div>
+                                    <div className="mb-4 text-sm text-zinc-400">{t.content}</div>
+                                    {t.tags && (
+                                        <div className="flex flex-row gap-1">
+                                            {t.tags.map((t) => (
+                                                <Badge key={t}>{t}</Badge>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        ))}
+                    </motion.div>
                 </div>
             </div>
         </section>
