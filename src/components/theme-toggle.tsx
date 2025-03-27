@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from "motion/react";
 import React, { useState, useEffect, useCallback } from "react";
 import { FaMoon, FaSun } from "react-icons/fa";
 
@@ -26,11 +27,17 @@ export function ThemeToggle() {
     }, [theme]);
 
     return (
-        <button
-            onClick={toggleTheme}
-            className="cursor-pointer p-1 text-xl transition-colors hover:text-zinc-600 dark:hover:text-zinc-400"
-        >
-            {theme === "light" ? <FaMoon /> : <FaSun />}
-        </button>
+        <AnimatePresence mode="popLayout">
+            <motion.button
+                key={theme}
+                onClick={toggleTheme}
+                className="text-foreground-silent hover:text-foreground-muted cursor-pointer p-1 text-xl transition-colors"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                exit={{ scale: 0 }}
+            >
+                {theme === "light" ? <FaMoon /> : <FaSun />}
+            </motion.button>
+        </AnimatePresence>
     );
 }

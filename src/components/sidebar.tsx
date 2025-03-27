@@ -54,20 +54,17 @@ export function Sidebar() {
                 </div>{" "}
             </div>
             <Navigation />
-            <footer className="flex flex-row items-center justify-between py-2 leading-0 text-zinc-400 select-none dark:text-zinc-800">
+            <footer className="text-foreground-silent flex flex-row items-center justify-between py-2 leading-0 select-none">
                 <div className="flex flex-row gap-2">
                     {footerIcons.map((f) => (
-                        <div
-                            key={f.href}
-                            className="block text-xl transition-colors hover:text-zinc-600 dark:hover:text-zinc-400"
-                        >
+                        <div key={f.href} className="hover:text-foreground-muted block text-xl transition-colors">
                             <Link href={f.href} className="block p-1" target="_blank">
                                 {f.icon}
                             </Link>
                         </div>
                     ))}
                 </div>
-                <div className="text-sm transition-colors">&copy; {new Date().getFullYear()} Ian Hornik</div>
+                <p className="text-foreground-silent text-sm">&copy; {new Date().getFullYear()} Ian Hornik</p>
                 <div className="">
                     <ThemeToggle />
                 </div>
@@ -105,10 +102,10 @@ function Navigation() {
                 <div key={nav.href}>
                     <span
                         className={clsx(
-                            "font-semibold tracking-wider uppercase transition-all",
+                            "font-semibold tracking-wider uppercase transition-all duration-500",
                             nav.href === activeHref
-                                ? "ml-2 text-zinc-900 dark:text-zinc-300"
-                                : "text-zinc-400 hover:ml-1 hover:text-zinc-600 dark:text-zinc-600 dark:hover:text-zinc-400",
+                                ? "text-foreground ml-2"
+                                : "text-foreground-silent hover:text-foreground-muted hover:ml-1",
                         )}
                     >
                         <Link

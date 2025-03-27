@@ -15,7 +15,7 @@ export function FeaturedProject({
     return (
         <article className="">
             <h2 className="mb-2 text-3xl font-semibold">{name}</h2>
-            {summary && <p className="mb-2 text-zinc-400">{summary}</p>}
+            {summary && <p className="text-foreground-muted mb-2">{summary}</p>}
             {bannerSrc && (
                 <div className="mb-2 overflow-hidden rounded-2xl">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
