@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 
+import { useIsMobile } from "./use-is-mobile";
+
 export function useHover(elementRef: React.RefObject<HTMLElement>) {
+    const isMobile = useIsMobile();
     const [isHovering, setIsHovering] = useState(false);
 
     useEffect(() => {
-        if (window.innerWidth < 640) {
-            // disable hover effects on mobile
-            setIsHovering(false);
-            return;
-        }
+        if (isMobile) return;
 
         const handleMouseOver = () => setIsHovering(true);
         const handleMouseOut = () => setIsHovering(false);
@@ -23,7 +22,12 @@ export function useHover(elementRef: React.RefObject<HTMLElement>) {
                 node.removeEventListener("mouseleave", handleMouseOut);
             };
         }
-    }, [elementRef]);
+    }, [elementRef, isMobile]);
 
     return isHovering;
+}
+
+export function useHoverAny(refs: React.RefObject<HTMLElement>[]) {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    return refs.map((r) => useHover(r)).some(Boolean);
 }

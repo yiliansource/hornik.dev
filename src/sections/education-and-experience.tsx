@@ -1,35 +1,45 @@
 "use client";
 
 import { Badge } from "@/components/badge";
-import { useHover } from "@/lib/use-hover";
+import { useHoverAny } from "@/lib/use-hover";
 import { useIsMobile } from "@/lib/use-is-mobile";
+import clsx from "clsx";
 import { motion } from "motion/react";
-import { useRef } from "react";
+import { useCallback, useRef } from "react";
 import { loremIpsum } from "react-lorem-ipsum";
 
-export function ExperienceSection() {
-    const isMobile = useIsMobile();
+const INACTIVE_OPACITY = 0.2;
+
+export function EducationAndExperienceSection() {
     const scrollContainerRef = useRef<HTMLDivElement>(null!);
+    const isMobile = useIsMobile();
 
     const experienceLabelRef = useRef<HTMLElement>(null!);
     const experienceTimelineRef = useRef<HTMLDivElement>(null!);
-
-    const isHoveringExperienceLabel = useHover(experienceLabelRef);
-    const isHoveringExperienceTimeline = useHover(experienceTimelineRef);
-    const isHoveringExperience = isHoveringExperienceLabel || isHoveringExperienceTimeline;
+    const isHoveringExperience = useHoverAny([experienceLabelRef, experienceTimelineRef]);
 
     const educationLabelRef = useRef<HTMLElement>(null!);
     const educationTimelineRef = useRef<HTMLDivElement>(null!);
+    const isHoveringEducation = useHoverAny([educationLabelRef, educationTimelineRef]);
 
-    const isHoveringEducationLabel = useHover(educationLabelRef);
-    const isHoveringEducationTimeline = useHover(educationTimelineRef);
-    const isHoveringEducation = isHoveringEducationLabel || isHoveringEducationTimeline;
+    const isHoveringEither = isHoveringExperience || isHoveringEducation;
 
-    const INACTIVE_OPACITY = 0.2;
+    const handleScrollContainerClick = useCallback(() => {
+        // tapping on mobile devices should scroll to the opposite panel
+        if (!isMobile) return;
+
+        const w = scrollContainerRef.current.clientWidth;
+        const targetScroll = scrollContainerRef.current.scrollLeft > w / 2 ? 0 : w;
+        scrollContainerRef.current.scrollTo({ left: targetScroll, behavior: "smooth" });
+    }, [isMobile]);
 
     return (
-        <section id="education-and-experience" className="max-w-[calc(100vw-12px*2)] px-2">
-            <div className="flex snap-x snap-mandatory flex-row overflow-x-auto" ref={scrollContainerRef}>
+        <section id="education-and-experience" className="">
+            <div
+                className="flex snap-x snap-mandatory flex-row overflow-x-scroll lg:overflow-x-visible"
+                ref={scrollContainerRef}
+                onClick={handleScrollContainerClick}
+            >
                 <div className="relative shrink-0 basis-[300px] snap-center snap-always">
                     <div className="absolute z-20 flex h-80 max-w-full items-center justify-center">
                         <p className="flex flex-wrap text-5xl font-semibold select-none">
@@ -40,10 +50,8 @@ export function ExperienceSection() {
                                 Education
                             </motion.span>
                             <motion.span
-                                animate={{
-                                    opacity: isHoveringEducation || isHoveringExperience ? INACTIVE_OPACITY : 1,
-                                }}
-                                className="mx-3 font-thin"
+                                animate={{ opacity: isHoveringEither ? INACTIVE_OPACITY : 1 }}
+                                className="text-foreground-muted mx-3 font-thin duration-500"
                             >
                                 &
                             </motion.span>
@@ -55,46 +63,7 @@ export function ExperienceSection() {
                             </motion.span>
                         </p>
                     </div>
-                    <motion.div
-                        className="flex flex-col gap-8"
-                        ref={experienceTimelineRef}
-                        onClick={() =>
-                            isMobile && scrollContainerRef.current.scrollTo({ left: 300 + 24, behavior: "smooth" })
-                        }
-                        animate={{ opacity: isHoveringEducation ? INACTIVE_OPACITY : 1 }}
-                    >
-                        {experience.map((t) => (
-                            <div
-                                key={t.title}
-                                className="relative flex flex-col py-2"
-                                style={{ marginTop: t.mt ? t.mt : 0 }}
-                            >
-                                <div className="text-foreground-silent flex flex-row justify-end gap-1 text-sm font-semibold transition-colors duration-500">
-                                    <span>{t.from}</span>
-                                    {t.to && (
-                                        <>
-                                            <span>&mdash;</span>
-                                            <span>{t.to}</span>
-                                        </>
-                                    )}
-                                </div>
-                                <div>
-                                    <div className="relative">
-                                        <div className="absolute top-1/2 right-[-25px] -translate-y-1/2 border-8 border-l-0 border-t-transparent border-r-zinc-800 border-b-transparent"></div>
-                                        <p className="mb-2 text-right font-semibold">{t.title}</p>
-                                    </div>
-                                    <div className="text-foreground-muted mb-2 text-right text-sm">{t.content}</div>
-                                    {t.tags && (
-                                        <div className="flex flex-row flex-wrap justify-end gap-1">
-                                            {t.tags.map((t) => (
-                                                <Badge key={t}>{t}</Badge>
-                                            ))}
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        ))}
-                    </motion.div>
+                    <Timeline items={experience} flip ref={experienceTimelineRef} dim={isHoveringEducation} />
                 </div>
                 <div className="relative mx-6">
                     <div className="absolute left-1/2 h-8 w-px border-l border-dashed border-zinc-800"></div>
@@ -104,51 +73,94 @@ export function ExperienceSection() {
                     <div className="absolute bottom-0 left-1/2 h-8 w-px border-l border-dashed border-zinc-800"></div>
                 </div>
                 <div className="relative shrink-0 basis-[300px] snap-center snap-always pt-4">
-                    <motion.div
-                        className="flex flex-col gap-8"
-                        ref={educationTimelineRef}
-                        onClick={() => isMobile && scrollContainerRef.current.scrollTo({ left: 0, behavior: "smooth" })}
-                        animate={{ opacity: isHoveringExperience ? INACTIVE_OPACITY : 1 }}
-                    >
-                        {education.map((t) => (
-                            <div
-                                key={t.title}
-                                className="relative flex flex-col py-2"
-                                style={{ marginTop: t.mt ? t.mt : 0 }}
-                            >
-                                <div className="text-foreground-silent flex flex-row gap-1 text-sm font-semibold transition-colors duration-500">
-                                    <span>{t.from}</span>
-                                    {t.to && (
-                                        <>
-                                            <span>&mdash;</span>
-                                            <span>{t.to}</span>
-                                        </>
-                                    )}
-                                </div>
-                                <div>
-                                    <div className="relative">
-                                        <div className="absolute top-1/2 left-[-24px] -translate-y-1/2 border-8 border-r-0 border-t-transparent border-b-transparent border-l-zinc-800"></div>
-                                        <p className="mb-2 font-semibold">{t.title}</p>
-                                    </div>
-                                    <div className="text-foreground-muted mb-4 text-sm">{t.content}</div>
-                                    {t.tags && (
-                                        <div className="flex flex-row gap-1">
-                                            {t.tags.map((t) => (
-                                                <Badge key={t}>{t}</Badge>
-                                            ))}
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        ))}
-                    </motion.div>
+                    <Timeline items={education} ref={educationTimelineRef} dim={isHoveringExperience} />
                 </div>
             </div>
         </section>
     );
 }
 
-interface TimelineItem {
+function Timeline({
+    items,
+    flip,
+    ref,
+    onClick,
+    dim,
+}: {
+    items: TimelineItemData[];
+    flip?: boolean;
+    ref?: React.Ref<HTMLDivElement>;
+    onClick?: () => void;
+    dim?: boolean;
+}) {
+    return (
+        <motion.div
+            className="flex flex-col gap-8"
+            ref={ref}
+            onClick={onClick}
+            animate={{ opacity: dim ? INACTIVE_OPACITY : 1 }}
+        >
+            {items.map((item) => (
+                <TimelineItem key={item.title} data={item} flip={flip} />
+            ))}
+        </motion.div>
+    );
+}
+
+// function ExperienceTimeline({ items, ref }: { items: TimelineItemData[]; ref: React.Ref<HTMLDivElement> }) {
+//     return (
+//         <motion.div
+//             className="flex flex-col gap-8"
+//             ref={ref}
+//             onClick={() => isMobile && scrollContainerRef.current.scrollTo({ left: 300 + 24, behavior: "smooth" })}
+//             animate={{ opacity: isHoveringEducation ? INACTIVE_OPACITY : 1 }}
+//         ></motion.div>
+//     );
+// }
+
+function TimelineItem({ flip, data }: { flip?: boolean; data: TimelineItemData }) {
+    return (
+        <div key={data.title} className="relative flex flex-col py-2" style={{ marginTop: data.mt ?? 0 }}>
+            <div
+                className={clsx(
+                    "text-foreground-silent flex flex-row gap-1 text-sm font-semibold transition-colors duration-500",
+                    flip && "justify-end",
+                )}
+            >
+                <span>{data.from}</span>
+                {data.to && (
+                    <>
+                        <span>&mdash;</span>
+                        <span>{data.to}</span>
+                    </>
+                )}
+            </div>
+            <div>
+                <div className="relative">
+                    <div
+                        className={clsx(
+                            "absolute top-1/2 -translate-y-1/2 border-8 border-t-transparent border-b-transparent",
+                            flip
+                                ? "right-[-25px] border-l-0 border-r-zinc-800"
+                                : "left-[-24px] border-r-0 border-l-zinc-800",
+                        )}
+                    ></div>
+                    <p className={clsx("mb-2 font-semibold", flip && "text-right")}>{data.title}</p>
+                </div>
+                <div className={clsx("text-foreground-muted text-sm", flip && "text-right")}>{data.content}</div>
+                {data.tags && (
+                    <div className={clsx("mt-3 flex flex-row flex-wrap justify-end gap-1", flip && "justify-end")}>
+                        {data.tags.map((t) => (
+                            <Badge key={t}>{t}</Badge>
+                        ))}
+                    </div>
+                )}
+            </div>
+        </div>
+    );
+}
+
+interface TimelineItemData {
     from: string;
     to?: string;
     mt?: number;
@@ -157,18 +169,18 @@ interface TimelineItem {
     tags?: string[];
 }
 
-const experience: TimelineItem[] = [
+const experience: TimelineItemData[] = [
     {
         mt: 320,
         from: "JUL 2023",
         to: "SEP 2023",
-        title: "Software Engineer Intern @ Cloudflight",
+        title: "Software Engineer Intern — Cloudflight",
         content: (
             <>
                 <p>
                     Working on the <span className="italic">HappyFotoDesigner</span> project allowed me to gain deep
-                    insight into the workings of a large-scale Angular project, through the creation of new components
-                    and features, together with the addition of unit tests.
+                    insight into the workings of a large-scale Angular project, through the autonomous creation of new
+                    components and features, as well as the creation of unit tests.
                 </p>
             </>
         ),
@@ -177,7 +189,7 @@ const experience: TimelineItem[] = [
     {
         from: "OCT 2020",
         to: "JUN 2021",
-        title: "Civil Servant  @ DaVinciLab",
+        title: "Civil Servant  — DaVinciLab",
         content: (
             <>
                 <p>
@@ -190,7 +202,7 @@ const experience: TimelineItem[] = [
     },
     {
         from: "2019",
-        title: "Technical Artist @ Molekül",
+        title: "Technical Artist — Molekül",
         content: (
             <>
                 <p>
@@ -202,11 +214,11 @@ const experience: TimelineItem[] = [
     },
 ];
 
-const education: TimelineItem[] = [
+const education: TimelineItemData[] = [
     {
         from: "2024",
         to: "present",
-        title: "Masters degree @ Technical University of Vienna",
+        title: "Masters Degree — Technical University of Vienna",
         content: (
             <>
                 <p className="mb-1">{loremIpsum({ p: 1, avgSentencesPerParagraph: 3, random: false })}</p>
@@ -220,7 +232,7 @@ const education: TimelineItem[] = [
     {
         from: "2021",
         to: "2024",
-        title: "Bachelors degree @ Technical University of Vienna",
+        title: "Bachelors Degree — Technical University of Vienna",
         content: (
             <>
                 <p className="mb-1">{loremIpsum({ p: 1, avgSentencesPerParagraph: 4, random: false })}</p>
