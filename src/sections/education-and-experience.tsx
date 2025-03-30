@@ -65,7 +65,7 @@ export function EducationAndExperienceSection() {
                     </div>
                     <Timeline items={experience} flip ref={experienceTimelineRef} dim={isHoveringEducation} />
                 </div>
-                <div className="relative mx-6">
+                <div className="relative mx-7">
                     <div className="absolute left-1/2 h-8 w-px border-l border-dashed border-zinc-800"></div>
                     <div className="absolute left-1/2 h-full py-8">
                         <div className="h-full border-l border-zinc-800"></div>
@@ -139,17 +139,17 @@ function TimelineItem({ flip, data }: { flip?: boolean; data: TimelineItemData }
                 <div className="relative">
                     <div
                         className={clsx(
-                            "absolute top-1/2 -translate-y-1/2 border-8 border-t-transparent border-b-transparent",
+                            "absolute top-1/2 -translate-y-1/2 border-6 border-t-transparent border-b-transparent",
                             flip
-                                ? "right-[-25px] border-l-0 border-r-zinc-800"
-                                : "left-[-24px] border-r-0 border-l-zinc-800",
+                                ? "right-[-28px] border-l-0 border-r-zinc-800"
+                                : "left-[-27px] border-r-0 border-l-zinc-800",
                         )}
                     ></div>
                     <p className={clsx("mb-2 font-semibold", flip && "text-right")}>{data.title}</p>
                 </div>
                 <div className={clsx("text-foreground-muted text-sm", flip && "text-right")}>{data.content}</div>
                 {data.tags && (
-                    <div className={clsx("mt-3 flex flex-row flex-wrap justify-end gap-1", flip && "justify-end")}>
+                    <div className={clsx("mt-3 flex flex-row flex-wrap gap-1", flip && "justify-end")}>
                         {data.tags.map((t) => (
                             <Badge key={t}>{t}</Badge>
                         ))}

@@ -1,16 +1,15 @@
 "use client";
 
-import clsx from "clsx";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
+import { Navigation } from "./navigation";
 import { ThemeToggle } from "./theme-toggle";
 
 export function Sidebar() {
     return (
-        <aside className="flex max-h-dvh flex-col justify-between pt-12 lg:sticky lg:top-0 lg:w-[410px] lg:pt-24">
+        <aside className="flex h-dvh flex-col justify-between pt-12 lg:sticky lg:top-0 lg:w-[410px] lg:pt-24">
             <header className="select-none">
                 <p className="mb-1 text-xl text-zinc-600 dark:text-zinc-400">Hi, my name is</p>
                 <h1 className="mb-8 text-6xl font-bold">
@@ -30,7 +29,8 @@ export function Sidebar() {
                     <em className="em-v-2">web developer</em> from Vienna, Austria.
                 </h2>
             </header>
-            <div className="my-8 flex flex-col gap-4 lg:my-0 lg:gap-8">
+
+            <div className="flex flex-col gap-4 lg:my-0 lg:gap-8">
                 <div>
                     <p className="text-lg">
                         <em>I am currently ...</em>
@@ -51,9 +51,17 @@ export function Sidebar() {
                             <Link href="mailto:ian@hornik.dev">ian@hornik.dev</Link>
                         </span>
                     </p>
-                </div>{" "}
+                </div>
             </div>
-            <Navigation />
+
+            <div className="block lg:hidden">
+                <p className="text-foreground-muted text-center">Scroll down to see more!</p>
+            </div>
+
+            <div className="hidden lg:block">
+                <Navigation />
+            </div>
+
             <footer className="text-foreground-silent flex flex-row items-center justify-between py-2 leading-0 select-none">
                 <div className="flex flex-row gap-2">
                     {footerIcons.map((f) => (
@@ -73,80 +81,6 @@ export function Sidebar() {
     );
 }
 
-function Navigation() {
-    const [activeHref, setActiveHref] = useState<string | null>(null);
-
-    useEffect(() => {
-        const handleScrollChange = () => {
-            const children = Array.from(document.querySelectorAll("section")) as HTMLElement[];
-            const mostVisible = getMostVisible(children);
-            if (!mostVisible) return;
-
-            const newHref = "#" + mostVisible.id;
-            if (activeHref === newHref) return;
-
-            setActiveHref(newHref);
-        };
-
-        window.addEventListener("scroll", handleScrollChange);
-        handleScrollChange();
-
-        return () => {
-            window.removeEventListener("scroll", handleScrollChange);
-        };
-    }, [activeHref]);
-
-    return (
-        <nav className="flex flex-col gap-2 select-none not-lg:hidden">
-            {navigation.map((nav) => (
-                <div key={nav.href}>
-                    <span
-                        className={clsx(
-                            "font-semibold tracking-wider uppercase transition-all duration-500",
-                            nav.href === activeHref
-                                ? "text-foreground ml-2"
-                                : "text-foreground-silent hover:text-foreground-muted hover:ml-1",
-                        )}
-                    >
-                        <Link
-                            href={nav.href}
-                            onClick={(e) => {
-                                e.preventDefault();
-                                history.pushState(null, "", nav.href);
-                                document.querySelector(nav.href)?.scrollIntoView({ behavior: "smooth" });
-                            }}
-                        >
-                            {nav.label}
-                        </Link>
-                    </span>
-                </div>
-            ))}
-        </nav>
-    );
-}
-
-const navigation: {
-    label: string;
-    href: string;
-}[] = [
-    {
-        label: "About",
-        href: "#about",
-    },
-    {
-        label: "Education & Experience",
-        href: "#education-and-experience",
-    },
-    {
-        label: "Projects",
-        href: "#projects",
-    },
-    {
-        label: "Artwork",
-        href: "#artwork",
-    },
-];
-
 const footerIcons: {
     label: string;
     href: string;
@@ -163,48 +97,3 @@ const footerIcons: {
         icon: <FaLinkedin />,
     },
 ];
-
-function getMostVisible(elements: HTMLElement[]): HTMLElement | null {
-    let element: HTMLElement | null = null;
-    let max: number = 0;
-
-    for (let i = 0; i < elements.length; i++) {
-        const visiblePx = getVisibleHeightPx(elements[i]);
-        if (visiblePx > max) {
-            max = visiblePx;
-            element = elements[i];
-        }
-    }
-
-    return element;
-}
-
-function getVisibleHeightPx(element: HTMLElement) {
-    const viewportHeight = window.innerHeight / 2;
-    const rect = element.getBoundingClientRect();
-    const height = rect.bottom - rect.top;
-    const visible = {
-        top: rect.top >= 0 && rect.top < viewportHeight,
-        bottom: rect.bottom > 0 && rect.bottom < viewportHeight,
-    };
-
-    let visiblePx = 0;
-
-    if (visible.top && visible.bottom) {
-        // Whole element is visible
-        visiblePx = height;
-    } else if (visible.top) {
-        visiblePx = viewportHeight - rect.top;
-    } else if (visible.bottom) {
-        visiblePx = rect.bottom;
-    } else if (height > viewportHeight && rect.top < 0) {
-        const absTop = Math.abs(rect.top);
-
-        if (absTop < height) {
-            // Part of element is visible
-            visiblePx = height - absTop;
-        }
-    }
-
-    return visiblePx;
-}

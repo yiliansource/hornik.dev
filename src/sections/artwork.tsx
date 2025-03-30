@@ -1,6 +1,9 @@
 "use client";
 
+import { LightboxImage } from "@/components/lightbox-image";
 import clsx from "clsx";
+import { useInView, motion } from "motion/react";
+import { useRef } from "react";
 
 const images: {
     src: string;
@@ -22,26 +25,26 @@ const images: {
     },
 ];
 
-/* eslint-disable @next/next/no-img-element */
 export function ArtworksSection() {
+    const section = useRef<HTMLElement | null>(null);
+    const isInView = useInView(section, { amount: 0.2, once: true });
+
     return (
-        <section id="artwork">
+        <motion.section
+            id="artwork"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: isInView ? 1 : 0 }}
+            transition={{ duration: 1 }}
+            ref={section}
+        >
             <h1 className="mb-10 text-5xl font-semibold">Artwork</h1>
             <div className="grid gap-4 lg:grid-cols-2">
                 {images.map((image) => (
-                    <div key={image.src} className={clsx("cursor-pointer overflow-hidden rounded-lg", image.className)}>
-                        <img
-                            src={image.src}
-                            alt={image.alt}
-                            draggable={false}
-                            onClick={() => {
-                                window.open(image.src, "_blank");
-                            }}
-                            loading="lazy"
-                        />
+                    <div key={image.src} className={clsx("", image.className)}>
+                        <LightboxImage src={image.src} alt={image.alt} draggable={false} />
                     </div>
                 ))}
             </div>
-        </section>
+        </motion.section>
     );
 }
