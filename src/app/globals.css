@@ -45,7 +45,6 @@ body {
 
     font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 
-    overflow-y: scroll;
     scroll-behavior: smooth;
 
     @apply transition-colors duration-500;

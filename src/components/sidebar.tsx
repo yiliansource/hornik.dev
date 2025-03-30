@@ -9,7 +9,7 @@ import { ThemeToggle } from "./theme-toggle";
 
 export function Sidebar() {
     return (
-        <aside className="flex h-dvh flex-col justify-between pt-12 lg:sticky lg:top-0 lg:w-[410px] lg:pt-24">
+        <aside className="flex h-screen flex-col justify-between pt-12 lg:sticky lg:top-0 lg:w-[410px] lg:pt-24">
             <header className="select-none">
                 <p className="mb-1 text-xl text-zinc-600 dark:text-zinc-400">Hi, my name is</p>
                 <h1 className="mb-8 text-6xl font-bold">

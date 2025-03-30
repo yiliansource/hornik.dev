@@ -2,8 +2,8 @@
 
 import { Badge } from "@/components/badge";
 import { labelToColor } from "@/lib/badge-color-lookup";
-import { useHoverAny } from "@/lib/use-hover";
-import { useIsMobile } from "@/lib/use-is-mobile";
+import { useHoverAny } from "@/lib/hooks/use-hover";
+import { useIsMobile } from "@/lib/hooks/use-is-mobile";
 import clsx from "clsx";
 import { motion } from "motion/react";
 import { useCallback, useRef } from "react";
@@ -72,6 +72,20 @@ export function EducationAndExperienceSection() {
                         <div className="h-full border-l border-zinc-800"></div>
                     </div>
                     <div className="absolute bottom-0 left-1/2 h-8 w-px border-l border-dashed border-zinc-800"></div>
+
+                    <div className="absolute top-8 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full">
+                        <div className="bg-background absolute h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full"></div>
+                        <div className="text-foreground-muted absolute right-4 -translate-y-1/2 rounded-lg px-2 py-1 text-xs whitespace-nowrap ring-1 ring-neutral-800">
+                            I am here!
+                        </div>
+                        <motion.div
+                            className="absolute h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-green-700"
+                            initial={{ scale: 1, opacity: 1 }}
+                            animate={{ scale: 2.5, opacity: 0 }}
+                            transition={{ repeat: Infinity, ease: "linear", duration: 1, repeatDelay: 0.5 }}
+                        ></motion.div>
+                        <motion.div className="absolute h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-green-500"></motion.div>
+                    </div>
                 </div>
                 <div className="relative shrink-0 basis-[300px] snap-center snap-always pt-4">
                     <Timeline items={education} ref={educationTimelineRef} dim={isHoveringExperience} />

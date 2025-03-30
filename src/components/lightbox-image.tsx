@@ -1,4 +1,4 @@
-import { useIsMobile } from "@/lib/use-is-mobile";
+import { useIsMobile } from "@/lib/hooks/use-is-mobile";
 import clsx from "clsx";
 import { AnimatePresence, motion } from "motion/react";
 import { useRef, useState } from "react";
