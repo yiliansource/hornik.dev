@@ -1,6 +1,7 @@
 "use client";
 
 import { Badge } from "@/components/badge";
+import { labelToColor } from "@/lib/badge-color-lookup";
 import { useHoverAny } from "@/lib/use-hover";
 import { useIsMobile } from "@/lib/use-is-mobile";
 import clsx from "clsx";
@@ -107,17 +108,6 @@ function Timeline({
     );
 }
 
-// function ExperienceTimeline({ items, ref }: { items: TimelineItemData[]; ref: React.Ref<HTMLDivElement> }) {
-//     return (
-//         <motion.div
-//             className="flex flex-col gap-8"
-//             ref={ref}
-//             onClick={() => isMobile && scrollContainerRef.current.scrollTo({ left: 300 + 24, behavior: "smooth" })}
-//             animate={{ opacity: isHoveringEducation ? INACTIVE_OPACITY : 1 }}
-//         ></motion.div>
-//     );
-// }
-
 function TimelineItem({ flip, data }: { flip?: boolean; data: TimelineItemData }) {
     return (
         <div key={data.title} className="relative flex flex-col py-2" style={{ marginTop: data.mt ?? 0 }}>
@@ -151,7 +141,9 @@ function TimelineItem({ flip, data }: { flip?: boolean; data: TimelineItemData }
                 {data.tags && (
                     <div className={clsx("mt-3 flex flex-row flex-wrap gap-1", flip && "justify-end")}>
                         {data.tags.map((t) => (
-                            <Badge key={t}>{t}</Badge>
+                            <Badge key={t} color={labelToColor(t)}>
+                                {t}
+                            </Badge>
                         ))}
                     </div>
                 )}

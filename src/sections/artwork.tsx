@@ -2,7 +2,7 @@
 
 import { LightboxImage } from "@/components/lightbox-image";
 import clsx from "clsx";
-import { useInView, motion } from "motion/react";
+import { motion, useInView } from "motion/react";
 import { useRef } from "react";
 
 const images: {
