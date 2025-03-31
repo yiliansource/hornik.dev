@@ -1,6 +1,9 @@
 export function AboutSection() {
     return (
-        <section id="about" className="text-foreground-muted grid grid-cols-1 gap-8 text-justify lg:grid-cols-2">
+        <section
+            id="about"
+            className="text-foreground-muted grid grid-cols-1 gap-0 text-justify lg:grid-cols-2 lg:gap-8"
+        >
             <div className="*:mb-4">
                 <p>
                     I started out in school with media and game design, and quickly took a liking to the technical
@@ -18,7 +21,10 @@ export function AboutSection() {
                     technologies.
                 </p>
                 <p>
-                    <span className="block">Sometimes I write papers for seminars.</span>
+                    <span className="block">
+                        I also work as a student employee, mostly tutoring exercise classes, and sometimes I write
+                        papers for seminars.
+                    </span>
                     <span className="text-foreground-silent block text-sm">(A link will be coming soon-ish.)</span>
                 </p>
                 <p></p>

@@ -27,7 +27,8 @@ export function AchievementsSection() {
 }
 
 const achievements: string[] = [
-    "Early Student Award",
-    "#2 Cloudflight Coding Contest",
-    "#7 Cloudflight Coding Contest",
+    "Early Student Award of the Austrian Mathematical Society (ÖMG)",
+    "#15 36th Classic Cloudflight Coding Contest",
+    "#2 38th Classic Cloudflight Coding Contest",
+    "#17 39th Classic Cloudflight Coding Contest",
 ];

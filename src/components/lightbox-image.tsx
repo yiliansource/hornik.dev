@@ -3,11 +3,16 @@ import clsx from "clsx";
 import { AnimatePresence, motion } from "motion/react";
 import { useRef, useState } from "react";
 
-export function LightboxImage(props: React.HTMLProps<HTMLImageElement>) {
+export function LightboxImage({
+    title,
+    description,
+    ...props
+}: React.HTMLProps<HTMLImageElement> & { title?: string; description?: React.ReactNode }) {
     const isMobile = useIsMobile();
 
     const [isLightboxOpen, setLightboxOpen] = useState(false);
     const [isImagePoppedOut, setImagePoppedOut] = useState(false);
+    const [showLightboxInfo, setShowLightboxInfo] = useState(false);
 
     const srcImageRef = useRef<HTMLImageElement>(null);
 
@@ -21,6 +26,7 @@ export function LightboxImage(props: React.HTMLProps<HTMLImageElement>) {
     };
     const handleLightboxClose = () => {
         setLightboxOpen(false);
+        setShowLightboxInfo(false);
 
         document.body.style.overflowY = "unset";
     };
@@ -62,7 +68,7 @@ export function LightboxImage(props: React.HTMLProps<HTMLImageElement>) {
                 onClick={handleLightboxOpen}
                 className={clsx(
                     "overflow-hidden rounded-lg bg-neutral-200 dark:bg-neutral-900/40",
-                    !isMobile && "cursor-pointer",
+                    !isMobile && "cursor-zoom-in",
                 )}
             >
                 {/* eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text */}
@@ -71,7 +77,7 @@ export function LightboxImage(props: React.HTMLProps<HTMLImageElement>) {
             <AnimatePresence>
                 {isLightboxOpen && srcRect && dstRect && (
                     <motion.div
-                        className="fixed top-0 left-0 z-20 h-dvh w-dvw"
+                        className="fixed top-0 left-0 z-20 h-dvh w-dvw cursor-zoom-out *:cursor-default"
                         initial={{ backdropFilter: "blur(0px)", backgroundColor: "rgb(0, 0, 0, 0)" }}
                         animate={{ backdropFilter: "blur(10px)", backgroundColor: "rgb(0, 0, 0, 0.5)" }}
                         exit={{ backdropFilter: "blur(0px)", backgroundColor: "rgb(0, 0, 0, 0)" }}
@@ -100,12 +106,36 @@ export function LightboxImage(props: React.HTMLProps<HTMLImageElement>) {
                             transition={{ ease: "easeInOut", duration: 0.4 }}
                             onClick={(e) => e.stopPropagation()}
                             onAnimationComplete={(def) => {
-                                setImagePoppedOut(def === "visible");
+                                const visible = def === "visible";
+                                setShowLightboxInfo(visible);
+                                setImagePoppedOut(visible);
                             }}
                         >
                             {/* eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text */}
                             <img {...props} />
                         </motion.div>
+                        {(title || description) && (
+                            <motion.div
+                                style={{
+                                    top: dstRect.y + dstRect.height,
+                                    left: dstRect.x,
+                                    width: dstRect.width,
+                                }}
+                                className="absolute mt-4 p-2"
+                                onClick={(e) => e.stopPropagation()}
+                                variants={{
+                                    hidden: { opacity: 0 },
+                                    visible: { opacity: 1 },
+                                }}
+                                transition={{ duration: 0.2 }}
+                                initial="hidden"
+                                animate={showLightboxInfo ? "visible" : "hidden"}
+                                exit="hidden"
+                            >
+                                {title && <h1 className="mb-1 text-4xl font-semibold">{title}</h1>}
+                                {description && <div>{description}</div>}
+                            </motion.div>
+                        )}
                     </motion.div>
                 )}
             </AnimatePresence>

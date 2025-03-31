@@ -5,24 +5,39 @@ import clsx from "clsx";
 import { motion, useInView } from "motion/react";
 import { useRef } from "react";
 
-const images: {
+const imageColumns: {
     src: string;
     className?: string;
     alt?: string;
-}[] = [
-    {
-        src: "/img/artworks/cherry-blossoms.jpg",
-    },
-    {
-        src: "/img/artworks/dining-room.jpg",
-    },
-    {
-        src: "/img/artworks/corridor.jpg",
-        className: "row-span-2",
-    },
-    {
-        src: "/img/artworks/temple.png",
-    },
+    title?: string;
+    description?: React.ReactNode;
+}[][] = [
+    [
+        {
+            src: "/img/artworks/cherry-blossoms.jpg",
+        },
+
+        {
+            src: "/img/artworks/corridor.jpg",
+        },
+    ],
+    [
+        {
+            src: "/img/artworks/dining-room.jpg",
+        },
+        {
+            src: "/img/artworks/temple.png",
+        },
+        {
+            src: "/img/artworks/in-reactio-veritas.jpg",
+            title: "In Reactio Veritas",
+            description: (
+                <>
+                    <p>This image was generated using brain wave data from two individuals engaged in a discussion.</p>
+                </>
+            ),
+        },
+    ],
 ];
 
 export function ArtworksSection() {
@@ -39,9 +54,19 @@ export function ArtworksSection() {
         >
             <h1 className="mb-10 text-5xl font-semibold">Artwork</h1>
             <div className="grid gap-4 lg:grid-cols-2">
-                {images.map((image) => (
-                    <div key={image.src} className={clsx("", image.className)}>
-                        <LightboxImage src={image.src} alt={image.alt} draggable={false} />
+                {imageColumns.map((col, i) => (
+                    <div key={i} className="flex flex-col gap-4">
+                        {col.map((img) => (
+                            <div key={img.src} className={clsx("", img.className)}>
+                                <LightboxImage
+                                    src={img.src}
+                                    alt={img.alt}
+                                    draggable={false}
+                                    title={img.title}
+                                    description={img.description}
+                                />
+                            </div>
+                        ))}
                     </div>
                 ))}
             </div>

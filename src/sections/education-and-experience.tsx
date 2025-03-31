@@ -7,7 +7,6 @@ import { useIsMobile } from "@/lib/hooks/use-is-mobile";
 import clsx from "clsx";
 import { motion } from "motion/react";
 import { useCallback, useRef } from "react";
-import { loremIpsum } from "react-lorem-ipsum";
 
 const INACTIVE_OPACITY = 0.2;
 
@@ -42,7 +41,7 @@ export function EducationAndExperienceSection() {
                 onClick={handleScrollContainerClick}
             >
                 <div className="relative shrink-0 basis-[300px] snap-center snap-always">
-                    <div className="absolute z-20 flex h-80 max-w-full items-center justify-center">
+                    <div className="absolute z-20 flex h-60 max-w-full items-center justify-center">
                         <p className="flex flex-wrap text-5xl font-semibold select-none">
                             <motion.span
                                 animate={{ opacity: isHoveringExperience ? INACTIVE_OPACITY : 1 }}
@@ -74,17 +73,17 @@ export function EducationAndExperienceSection() {
                     <div className="absolute bottom-0 left-1/2 h-8 w-px border-l border-dashed border-zinc-800"></div>
 
                     <div className="absolute top-8 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full">
-                        <div className="bg-background absolute h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full"></div>
+                        <div className="bg-background absolute h-4 w-4 -translate-x-1/2 -translate-y-1/2 rounded-full transition-colors duration-500"></div>
                         <div className="text-foreground-muted absolute right-4 -translate-y-1/2 rounded-lg px-2 py-1 text-xs whitespace-nowrap ring-1 ring-neutral-800">
                             I am here!
                         </div>
                         <motion.div
-                            className="absolute h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-green-700"
+                            className="absolute h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-green-300 transition-colors duration-500 dark:bg-green-700"
                             initial={{ scale: 1, opacity: 1 }}
                             animate={{ scale: 2.5, opacity: 0 }}
                             transition={{ repeat: Infinity, ease: "linear", duration: 1, repeatDelay: 0.5 }}
                         ></motion.div>
-                        <motion.div className="absolute h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-green-500"></motion.div>
+                        <motion.div className="absolute h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-green-500 transition-colors duration-500"></motion.div>
                     </div>
                 </div>
                 <div className="relative shrink-0 basis-[300px] snap-center snap-always pt-4">
@@ -110,7 +109,7 @@ function Timeline({
 }) {
     return (
         <motion.div
-            className="flex flex-col gap-8"
+            className="flex flex-col gap-4"
             ref={ref}
             onClick={onClick}
             animate={{ opacity: dim ? INACTIVE_OPACITY : 1 }}
@@ -177,7 +176,7 @@ interface TimelineItemData {
 
 const experience: TimelineItemData[] = [
     {
-        mt: 320,
+        mt: 240,
         from: "JUL 2023",
         to: "SEP 2023",
         title: "Software Engineer Intern — Cloudflight",
@@ -193,6 +192,7 @@ const experience: TimelineItemData[] = [
         tags: ["Angular", "TypeScript", "Docker"],
     },
     {
+        mt: 20,
         from: "OCT 2020",
         to: "JUN 2021",
         title: "Civil Servant  — DaVinciLab",
@@ -222,12 +222,16 @@ const experience: TimelineItemData[] = [
 
 const education: TimelineItemData[] = [
     {
+        mt: 20,
         from: "2024",
         to: "present",
         title: "Masters Degree — Technical University of Vienna",
         content: (
             <>
-                <p className="mb-1">{loremIpsum({ p: 1, avgSentencesPerParagraph: 3, random: false })}</p>
+                <p className="mb-1">
+                    My chosen specialization includes analysis and geometry. Once again, I have been a tutor for the
+                    following exercise classes:
+                </p>
                 <ul>
                     <li>Analysis III (2024W)</li>
                     <li>Functional Analysis (2025S)</li>
@@ -236,12 +240,20 @@ const education: TimelineItemData[] = [
         ),
     },
     {
+        mt: 10,
         from: "2021",
         to: "2024",
         title: "Bachelors Degree — Technical University of Vienna",
         content: (
             <>
-                <p className="mb-1">{loremIpsum({ p: 1, avgSentencesPerParagraph: 4, random: false })}</p>
+                <p className="mb-1">
+                    Our programme covered the essentials in analysis, algebra and measure theory, before diving into
+                    deeper areas like functional analysis, which took my interest.
+                </p>
+                <p className="mb-1">
+                    Over the last semesters I worked as a student employee, acting as a tutor for the following exercise
+                    classes:
+                </p>
                 <ul className="">
                     <li>Introduction to Programming (2022W)</li>
                     <li>Computermathematics (2023S)</li>
@@ -251,13 +263,17 @@ const education: TimelineItemData[] = [
         ),
     },
     {
-        mt: 80,
+        mt: 60,
         from: "2015",
         to: "2020",
         title: "HTL Spengergasse",
         content: (
             <>
-                <p className="mb-1">{loremIpsum({ p: 1, avgSentencesPerParagraph: 3, random: false })}</p>
+                <p className="mb-1">
+                    As my secondary education, I pursued media and game design here. We learned the theory of game
+                    development, as well as operating the technologies that come with it, including Unity3D, Wwise, the
+                    Adobe suite and Visual Studio.
+                </p>
             </>
         ),
     },

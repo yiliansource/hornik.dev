@@ -129,7 +129,7 @@ function ProjectItem({ data }: { data: ProjectInfo }) {
                             ),
                             typeof stars === "number" && (
                                 <span className="text-foreground-muted flex flex-row items-center gap-1">
-                                    <FaStar className="text-sm text-yellow-200" />
+                                    <FaStar className="text-sm text-yellow-400 dark:text-yellow-200" />
                                     <span className="text-sm">{stars}</span>
                                 </span>
                             ),
