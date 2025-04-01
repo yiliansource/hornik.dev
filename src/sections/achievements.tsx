@@ -26,9 +26,15 @@ export function AchievementsSection() {
     );
 }
 
-const achievements: string[] = [
+const achievements: React.ReactNode[] = [
     "Early Student Award of the Austrian Mathematical Society (ÖMG)",
-    "#15 36th Classic Cloudflight Coding Contest",
-    "#2 38th Classic Cloudflight Coding Contest",
-    "#17 39th Classic Cloudflight Coding Contest",
+    <>
+        #15 @ 36<sup>th</sup> Classic Cloudflight Coding Contest
+    </>,
+    <>
+        #2 @ 38<sup>th</sup> Classic Cloudflight Coding Contest
+    </>,
+    <>
+        #7 @ 39<sup>th</sup> Classic Cloudflight Coding Contest
+    </>,
 ];

@@ -32,15 +32,13 @@ export function Sidebar() {
 
             <div className="flex flex-col gap-4 lg:my-0 lg:gap-8">
                 <div>
-                    <p className="text-lg">
-                        <em>I am currently ...</em>
-                    </p>
                     <p>
-                        getting my master&apos;s degree in Technical Mathematics at the Technical University of Vienna.
+                        <em>I am currently</em> getting my master&apos;s degree in Technical Mathematics at the
+                        Technical University of Vienna.
                     </p>
                 </div>
                 <div>
-                    <p className="text-lg">
+                    <p>
                         <em className="em-v-2">Want to reach out?</em>
                     </p>
                     <p className="flex flex-row items-center gap-2">
