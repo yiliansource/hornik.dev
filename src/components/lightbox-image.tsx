@@ -41,8 +41,11 @@ export function LightboxImage({
         const screenHeight = window.innerHeight;
         const originalImageAspect = srcRect.width / srcRect.height;
 
+        // this is a bit hacky, but ensures that enough space is on screen to display the image AND the description.
+        const extraSpaceFactor = title || description ? 0.8 : 1;
+
         if (originalImageAspect > 1) {
-            const desiredWidth = screenWidth * 0.75;
+            const desiredWidth = screenWidth * 0.75 * extraSpaceFactor;
             const desiredHeight = desiredWidth / originalImageAspect;
             dstRect = DOMRect.fromRect({
                 x: screenWidth / 2 - desiredWidth / 2,
@@ -51,7 +54,7 @@ export function LightboxImage({
                 height: desiredHeight,
             });
         } else {
-            const desiredHeight = screenHeight * 0.9;
+            const desiredHeight = screenHeight * 0.9 * extraSpaceFactor;
             const desiredWidth = desiredHeight * originalImageAspect;
             dstRect = DOMRect.fromRect({
                 x: screenWidth / 2 - desiredWidth / 2,
