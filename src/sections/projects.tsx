@@ -45,6 +45,13 @@ const projects: ProjectInfo[] = [
         homepage: "https://yilian.itch.io/tenacious-tanks",
         tags: ["C#", "Unity3D", "Wwise"],
     },
+    {
+        title: "Quote of the Day",
+        description: "A minimal website that displays a different inspirational quote every day.",
+        homepage: "https://qotd.hornik.dev",
+        github: "https://github.com/yiliansource/quote-of-the-day",
+        tags: ["TypeScript", "React.js"],
+    },
 ];
 
 export function ProjectsSection() {
