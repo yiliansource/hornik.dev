@@ -1,4 +1,8 @@
 {
+    "printWidth": 120,
     "tabWidth": 4,
-    "printWidth": 120
+    "importOrder": ["^@core/(.*)$", "^@server/(.*)$", "^@ui/(.*)$", "^[./]"],
+    "importOrderSeparation": true,
+    "plugins": ["@trivago/prettier-plugin-sort-imports", "prettier-plugin-tailwindcss"],
+    "tailwindFunctions": ["tv"]
 }

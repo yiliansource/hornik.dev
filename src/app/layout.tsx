@@ -1,12 +1,7 @@
-import clsx from "clsx";
 import type { Metadata } from "next";
-import { Bitter, Geist, Geist_Mono } from "next/font/google";
-import "./globals.scss";
+import { Geist, Geist_Mono } from "next/font/google";
 
-const bitter = Bitter({
-    variable: "--font-bitter",
-    subsets: ["latin"],
-});
+import "./globals.css";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -18,26 +13,10 @@ const geistMono = Geist_Mono({
     subsets: ["latin"],
 });
 
-// const lexend = Lexend({
-//     variable: "--font-lexend",
-//     subsets: ["latin"],
-// });
-
 export const metadata: Metadata = {
-    title: "Home - Ian Hornik",
+    title: "Ian Hornik | Portfolio",
     description: "My portfolio site.",
 };
-
-// const navigation: { name: string; href: string }[] = [
-//     {
-//         name: "Home",
-//         href: "/",
-//     },
-//     {
-//         name: "Projects",
-//         href: "/projects",
-//     },
-// ];
 
 export default function RootLayout({
     children,
@@ -46,31 +25,9 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body
-                className={clsx(
-                    ...[bitter, geistSans, geistMono].map((f) => f.variable),
-                    "antialiased",
-                    "flex flex-col min-h-screen overflow-x-hidden overflow-y-auto",
-                )}
-            >
-                <header className="h-[64px] flex flex-row items-center mx-auto w-full max-w-6xl">
-                    <div></div>
-                    <div className="ml-auto mr-0">
-                        {/* <nav className="font-[family-name:var(--font-bitter)]">
-                            <ul className="flex flex-row">
-                                {navigation.map(({ name, href }) => (
-                                    <li key={href}>
-                                        <a href={href} className="px-4 py-2">
-                                            {name}
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
-                        </nav> */}
-                    </div>
-                </header>
-                <main className="flex-1 mx-auto w-full max-w-5xl">{children}</main>
-                <footer></footer>
+            <head></head>
+            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`} data-theme="dark">
+                {children}
             </body>
         </html>
     );
