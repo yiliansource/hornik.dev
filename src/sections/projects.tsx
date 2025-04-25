@@ -98,6 +98,7 @@ function ProjectItem({ data }: { data: ProjectInfo }) {
 
     useEffect(() => {
         if (!data.github) return;
+        if (!("parse" in URL)) return;
 
         const githubUrl = URL.parse(data.github);
         if (!githubUrl) return;
