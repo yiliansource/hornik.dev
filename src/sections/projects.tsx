@@ -52,6 +52,13 @@ const projects: ProjectInfo[] = [
         github: "https://github.com/yiliansource/quote-of-the-day",
         tags: ["TypeScript", "React.js"],
     },
+    {
+        title: "Hex2048",
+        description: "A hex-grid version of the game 2048.",
+        homepage: "https://hex2048.hornik.dev",
+        github: "https://github.com/yiliansource/hex2048",
+        tags: ["TypeScript", "React.js"],
+    },
 ];
 
 export function ProjectsSection() {
@@ -67,28 +74,17 @@ export function ProjectsSection() {
             transition={{ duration: 1 }}
             ref={section}
         >
-            <h1 className="text-5xl font-semibold">Projects</h1>
+            <h1
+                className="top-8 text-5xl font-semibold"
+                // style={{ textShadow: "0px 1px 2px #000, 0px 1px 4px #000, 0px 1px 8px #000" }}
+            >
+                Projects
+            </h1>
             <div className={clsx("grid grid-cols-1 gap-6", "lg:grid-cols-2 lg:gap-8")}>
                 {projects.map((p) => (
                     <ProjectItem key={p.title} data={p} />
                 ))}
             </div>
-            {/* <FeaturedProject
-                name="party.js"
-                summary="A JavaScript library to brighten up your user's site experience with visual effects!"
-                tags={["TypeScript", "HTML"]}
-                bannerSrc={"/img/projects/partyjs.png"}
-            >
-                <LoremIpsum p={1} />
-            </FeaturedProject>
-            <FeaturedProject
-                name="Tenacious Tanks"
-                summary="A free-to-play, local-multiplayer, fast-paced arena brawler, where up to 4 players challenge each other in head-to-head tactical combat! This was my graduation project."
-                tags={["Unity3D", "C#", "Wwise"]}
-                bannerSrc={"/img/projects/tenacious-tanks.png"}
-            >
-                <LoremIpsum p={1} />
-            </FeaturedProject> */}
         </motion.section>
     );
 }

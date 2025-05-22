@@ -1,6 +1,9 @@
 export function AboutSection() {
     return (
-        <section id="about" className="text-foreground-muted grid grid-cols-1 text-justify lg:grid-cols-[1fr_auto_1fr]">
+        <section
+            id="about"
+            className="text-foreground-muted grid grid-cols-1 text-justify hyphens-auto lg:grid-cols-[1fr_auto_1fr]"
+        >
             <div className="*:mb-4">
                 <p>
                     I started out in school with media and game design, and quickly took a liking to the technical

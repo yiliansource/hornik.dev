@@ -1,28 +1,29 @@
 "use client";
 
-import { motion, useInView } from "motion/react";
-import { useRef } from "react";
+import { PageSection } from "@/components/page-section";
+import { BsTrophyFill } from "react-icons/bs";
+import { TbLaurelWreathFilled } from "react-icons/tb";
 
 export function AchievementsSection() {
-    const section = useRef<HTMLElement | null>(null);
-    const isInView = useInView(section, { amount: 0.2, once: true });
-
     return (
-        <motion.section
-            id="achievements"
-            className="flex flex-col gap-12"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: isInView ? 1 : 0 }}
-            transition={{ duration: 1 }}
-            ref={section}
-        >
-            <h1 className="text-5xl font-semibold">Achievements</h1>
-            <ul className="flex flex-col gap-2">
+        <PageSection id="achievements" title="Achievements">
+            <div className="absolute top-6 -left-16 -z-10 text-[300px] text-green-600 opacity-10">
+                <TbLaurelWreathFilled />
+            </div>
+            <div className="flex flex-col gap-2 pl-7">
                 {achievements.map((ach, i) => (
-                    <li key={i}>{ach}</li>
+                    <div className="relative" key={i}>
+                        <span
+                            className="absolute top-1/2 -left-3 -translate-x-full -translate-y-1/2 text-yellow-500"
+                            style={{ filter: "drop-shadow(0 2px 4px #353521)" }}
+                        >
+                            <BsTrophyFill />
+                        </span>
+                        <span>{ach}</span>
+                    </div>
                 ))}
-            </ul>
-        </motion.section>
+            </div>
+        </PageSection>
     );
 }
 

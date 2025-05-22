@@ -1,15 +1,36 @@
 "use client";
 
 import Link from "next/link";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
+import { FaGithub, FaLinkedin, FaMailBulk } from "react-icons/fa";
 
 import { Navigation } from "./navigation";
 import { ThemeToggle } from "./theme-toggle";
 
+const contactOptions: {
+    label: string;
+    href: string;
+    icon: React.ReactNode;
+}[] = [
+    {
+        label: "Email",
+        href: "mailto:ian@hornik.dev",
+        icon: <FaMailBulk />,
+    },
+    {
+        label: "Github",
+        href: "https://github.com/yiliansource",
+        icon: <FaGithub />,
+    },
+    {
+        label: "Linkedin",
+        href: "https://www.linkedin.com/in/ian-hornik-271486212/",
+        icon: <FaLinkedin />,
+    },
+];
+
 export function Sidebar() {
     return (
-        <aside className="flex h-screen flex-col justify-between pt-12 lg:sticky lg:top-0 lg:w-[410px] lg:pt-24">
+        <div className="flex h-screen flex-col justify-between pt-12 lg:sticky lg:top-0 lg:w-[410px] lg:pt-24">
             <header className="select-none">
                 <p className="mb-1 text-xl text-zinc-600 dark:text-zinc-400">Hi, my name is</p>
                 <h1 className="mb-8 text-6xl font-bold">
@@ -38,17 +59,16 @@ export function Sidebar() {
                     </p>
                 </div>
                 <div>
-                    <p>
+                    <p className="mb-1">
                         <em className="em-v-2">Want to reach out?</em>
                     </p>
-                    <p className="flex flex-row items-center gap-2">
-                        <span>
-                            <MdEmail />
-                        </span>
-                        <span className="hover:underline">
-                            <Link href="mailto:ian@hornik.dev">ian@hornik.dev</Link>
-                        </span>
-                    </p>
+                    <div className="flex flex-row items-center gap-2">
+                        {contactOptions.map((c) => (
+                            <Link key={c.href} href={c.href} className="p-1 text-xl transition-colors">
+                                <span className="text-(--fancy-gradient-1)">{c.icon}</span>
+                            </Link>
+                        ))}
+                    </div>
                 </div>
             </div>
 
@@ -61,37 +81,11 @@ export function Sidebar() {
             </div>
 
             <footer className="text-foreground-silent flex flex-row items-center justify-between py-2 leading-0 select-none">
-                <div className="flex flex-row gap-2">
-                    {footerIcons.map((f) => (
-                        <div key={f.href} className="hover:text-foreground-muted block text-xl transition-colors">
-                            <Link href={f.href} className="block p-1" target="_blank">
-                                {f.icon}
-                            </Link>
-                        </div>
-                    ))}
-                </div>
                 <p className="text-foreground-silent text-sm">&copy; {new Date().getFullYear()} Ian Hornik</p>
                 <div className="">
                     <ThemeToggle />
                 </div>
             </footer>
-        </aside>
+        </div>
     );
 }
-
-const footerIcons: {
-    label: string;
-    href: string;
-    icon: React.ReactNode;
-}[] = [
-    {
-        label: "Github",
-        href: "https://github.com/yiliansource",
-        icon: <FaGithub />,
-    },
-    {
-        label: "Linkedin",
-        href: "https://www.linkedin.com/in/ian-hornik-271486212/",
-        icon: <FaLinkedin />,
-    },
-];

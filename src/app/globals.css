@@ -6,8 +6,8 @@
     --background: #ffffff;
 
     --foreground: #171717;
-    --foreground-muted: var(--color-neutral-600);
-    --foreground-silent: var(--color-neutral-400);
+    --foreground-muted: var(--color-neutral-700);
+    --foreground-silent: var(--color-neutral-500);
 
     --fancy-gradient-1: linear-gradient(to right, #719ecf, #b671cf, #b87252);
     --fancy-gradient-2: linear-gradient(to right, #b15a7a, #b671cf, #76b7cb);
