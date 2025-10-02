@@ -6,9 +6,9 @@ export function getInitialIsDark() {
 }
 
 export function getIsDark() {
-    return document.body.dataset.dark === "true";
+    return document.documentElement.dataset.dark == "true";
 }
 
 export function applyIsDark(d: boolean) {
-    document.body.dataset.dark = String(d);
+    document.documentElement.dataset.dark = String(d);
 }

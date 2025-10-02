@@ -136,7 +136,9 @@ function ProjectItem({ data }: { data: ProjectInfo }) {
                     )}
                 </div>
             </div>
-            <div className="text-foreground-muted prose prose-sm dark:prose-invert mb-2">{data.description}</div>
+            <div className="text-foreground-muted prose prose-sm dark:prose-invert mb-2 text-justify hyphens-auto">
+                {data.description}
+            </div>
             {data.tags && (
                 <div className="mt-3 flex flex-row flex-wrap gap-1">
                     {data.tags.map((t) => (

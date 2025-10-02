@@ -18,7 +18,6 @@ export function FeaturedProject({
             {summary && <p className="text-foreground-muted mb-2">{summary}</p>}
             {bannerSrc && (
                 <div className="mb-2 overflow-hidden rounded-2xl">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={bannerSrc} alt={name} draggable={false} />
                 </div>
             )}

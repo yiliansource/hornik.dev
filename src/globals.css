@@ -35,7 +35,7 @@
     --font-mono: var(--font-mono);
 }
 
-body[data-dark="true"] {
+:root[data-dark="true"] {
     --background: #030608;
 
     --foreground: #e1ecf3;
@@ -57,8 +57,6 @@ body {
 
     @apply antialiased;
     @apply transition-colors duration-300;
-
-    transition-property: background-color;
 }
 
 p,

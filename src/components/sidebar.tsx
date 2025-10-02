@@ -44,19 +44,17 @@ export function Sidebar() {
                         Ian Hornik.
                     </a>
                 </h1>
-                <h2 className="text-2xl">
+                <h2 className="text-2xl leading-9">
                     I&apos;m a <em className="em-v-1">mathematics student</em> and{" "}
                     <em className="em-v-2">web developer</em> from Vienna, Austria.
                 </h2>
             </header>
 
             <div className="flex flex-col gap-4 lg:my-0 lg:gap-8">
-                <div>
-                    <p>
-                        <em>I am currently</em> getting my master&apos;s degree in Technical Mathematics at the
-                        Technical University of Vienna.
-                    </p>
-                </div>
+                <p className="leading-7">
+                    <em>I am currently</em> getting my master&apos;s degree in Technical Mathematics at the Technical
+                    University of Vienna.
+                </p>
                 <div>
                     <p className="mb-1 font-semibold">Want to reach out?</p>
                     <div className="flex flex-row items-center gap-2">

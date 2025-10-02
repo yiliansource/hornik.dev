@@ -44,7 +44,7 @@ function TimelineItem({ data }: { data: TimelineItemData }) {
             </div>
             <div>
                 <p className="mb-3 font-semibold">{data.title}</p>
-                <div className="prose dark:prose-invert text-foreground-muted prose-sm [&>*]:my-2">
+                <div className="prose dark:prose-invert text-foreground-muted prose-sm text-justify hyphens-auto [&>*]:my-2">
                     <Markdown>{data.content}</Markdown>
                 </div>
                 {data.tags && (
