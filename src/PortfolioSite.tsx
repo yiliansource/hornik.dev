@@ -1,7 +1,8 @@
 import { BackToTop } from "@/components/back-to-top";
-import { SectionList } from "@/components/section-list";
 import { Sidebar } from "@/components/sidebar";
 import clsx from "clsx";
+
+import { SectionList } from "./sections";
 
 export default function PortfolioSite() {
     return (

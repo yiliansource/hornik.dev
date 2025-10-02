@@ -1,5 +1,6 @@
 "use client";
 
+import { SectionHeading } from "@/components/sections";
 import { LightboxImage } from "@/components/ui/lightbox-image";
 import clsx from "clsx";
 import { motion, useInView } from "motion/react";
@@ -52,7 +53,7 @@ export function ArtworksSection() {
             transition={{ duration: 1 }}
             ref={section}
         >
-            <h1 className="mb-10 text-5xl font-semibold">Artwork</h1>
+            <SectionHeading>Artwork</SectionHeading>
             <div className="grid gap-4 lg:grid-cols-2">
                 {imageColumns.map((col, i) => (
                     <div key={i} className="flex flex-col gap-4">

@@ -1,9 +1,13 @@
 import { motion, useInView, type HTMLMotionProps } from "motion/react";
-import { useRef } from "react";
+import { useRef, type HTMLAttributes } from "react";
+import { twMerge } from "tailwind-merge";
 
-export function PageSection({
+export function SectionHeading({ className, ...props }: HTMLAttributes<HTMLHeadingElement>) {
+    return <h1 className={twMerge("mb-8 text-5xl font-semibold md:mb-10", className)} {...props} />;
+}
+
+export function RevealableSection({
     id,
-    title,
     children,
     ...props
 }: HTMLMotionProps<"section"> & { id: string; title?: string }) {
@@ -13,17 +17,14 @@ export function PageSection({
     return (
         <motion.section
             id={id}
-            className="relative flex flex-col gap-12"
+            className="relative"
             initial={{ opacity: 0 }}
             animate={{ opacity: isInView ? 1 : 0 }}
             transition={{ duration: 1 }}
             ref={section}
             {...props}
         >
-            <>
-                {title && <h1 className="text-5xl font-semibold">{title}</h1>}
-                {children}
-            </>
+            {children}
         </motion.section>
     );
 }

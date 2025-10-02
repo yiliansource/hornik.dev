@@ -1,13 +1,14 @@
 "use client";
 
-import { PageSection } from "@/components/page-section";
+import { RevealableSection, SectionHeading } from "@/components/sections";
 import { BsTrophyFill } from "react-icons/bs";
 import { TbLaurelWreathFilled } from "react-icons/tb";
 
 export function AchievementsSection() {
     return (
-        <PageSection id="achievements" title="Achievements">
-            <div className="absolute top-6 -left-16 -z-10 text-[300px] text-green-600 opacity-20">
+        <RevealableSection id="achievements">
+            <SectionHeading>Achievements</SectionHeading>
+            <div className="absolute top-6 -left-16 -z-10 text-[300px] text-green-600 opacity-20 transition-opacity dark:opacity-10">
                 <TbLaurelWreathFilled />
             </div>
             <div className="flex flex-col gap-2 pl-7">
@@ -23,7 +24,7 @@ export function AchievementsSection() {
                     </div>
                 ))}
             </div>
-        </PageSection>
+        </RevealableSection>
     );
 }
 

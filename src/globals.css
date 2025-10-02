@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @import "@fontsource/geist-sans/100.css";
 @import "@fontsource/geist-sans/200.css";

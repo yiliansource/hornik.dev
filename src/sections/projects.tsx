@@ -121,6 +121,12 @@ function ProjectItem({ data }: { data: ProjectInfo }) {
                     )}
                 </h3>
                 <div className="flex flex-row items-center gap-4 select-none">
+                    {typeof stars === "number" && (
+                        <span className="text-foreground-muted flex flex-row items-center gap-1">
+                            <FaStar className="text-sm text-yellow-400 dark:text-yellow-200" />
+                            <span className="text-sm">{stars}</span>
+                        </span>
+                    )}
                     {data.github && (
                         <span className="text-foreground-muted hover:text-foreground text-lg transition-colors">
                             <a href={data.github} target="_blank">
@@ -128,15 +134,9 @@ function ProjectItem({ data }: { data: ProjectInfo }) {
                             </a>
                         </span>
                     )}
-                    {typeof stars === "number" && (
-                        <span className="text-foreground-muted flex flex-row items-center gap-1">
-                            <FaStar className="text-sm text-yellow-400 dark:text-yellow-200" />
-                            <span className="text-sm">{stars}</span>
-                        </span>
-                    )}
                 </div>
             </div>
-            <div className="text-foreground-muted mb-2 text-sm">{data.description}</div>
+            <div className="text-foreground-muted prose prose-sm dark:prose-invert mb-2">{data.description}</div>
             {data.tags && (
                 <div className="mt-3 flex flex-row flex-wrap gap-1">
                     {data.tags.map((t) => (
