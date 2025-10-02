@@ -1,5 +1,5 @@
-import { SectionList } from "@/components/section-list";
 import { Sidebar } from "@/components/sidebar";
+import { SectionList } from "@/sections";
 import clsx from "clsx";
 
 export default function Home() {
