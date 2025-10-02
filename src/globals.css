@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+@import "@fontsource/geist-sans/100.css";
+@import "@fontsource/geist-sans/200.css";
+@import "@fontsource/geist-sans/400.css";
+@import "@fontsource/geist-sans/600.css";
+@import "@fontsource/geist-sans/700.css";
+@import "@fontsource/geist-mono";
+
+@custom-variant dark (&:where([data-dark=true], [data-dark=true] *));
+
+:root {
+    --background: #ffffff;
+
+    --foreground: #171717;
+    --foreground-muted: var(--color-neutral-700);
+    --foreground-silent: var(--color-neutral-500);
+
+    --font-sans: "Geist Sans", Arial, Helvetica, sans-serif;
+    --font-mono: "Geist Mono", monospace;
+
+    --fancy-gradient-1: linear-gradient(to right, #719ecf, #b671cf, #b87252);
+    --fancy-gradient-2: linear-gradient(to right, #b15a7a, #b671cf, #76b7cb);
+}
+
+@theme inline {
+    --color-background: var(--background);
+
+    --color-foreground: var(--foreground);
+    --color-foreground-muted: var(--foreground-muted);
+    --color-foreground-silent: var(--foreground-silent);
+
+    --font-sans: var(--font-sans);
+    --font-mono: var(--font-mono);
+}
+
+body[data-dark="true"] {
+    --background: #030608;
+
+    --foreground: #e1ecf3;
+    --foreground-muted: var(--color-neutral-400);
+    --foreground-silent: var(--color-neutral-600);
+}
+
+html {
+    scrollbar-gutter: stable;
+}
+
+body {
+    background: var(--background);
+    color: var(--foreground);
+
+    font-family: var(--font-sans);
+
+    scroll-behavior: smooth;
+
+    @apply antialiased;
+    @apply transition-colors duration-300;
+
+    transition-property: background-color;
+}
+
+p,
+h1,
+h2,
+h3,
+li {
+    @apply transition-colors duration-300;
+}
+
+.em-v-1 {
+    --em-variant: var(--fancy-gradient-1);
+}
+.em-v-2 {
+    --em-variant: var(--fancy-gradient-2);
+}
+
+em {
+    font-style: normal;
+    font-weight: bold;
+
+    background: var(--em-variant, var(--fancy-gradient-1));
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+ul {
+    @apply list-disc pl-5;
+}
