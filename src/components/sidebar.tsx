@@ -1,5 +1,3 @@
-"use client";
-
 import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 
 import { Navigation } from "./navigation";
@@ -59,7 +57,7 @@ export function Sidebar() {
                     <p className="mb-1 font-semibold">Want to reach out?</p>
                     <div className="flex flex-row items-center gap-2">
                         {contactOptions.map((c) => (
-                            <a key={c.href} href={c.href} className="p-1 text-xl transition-colors">
+                            <a key={c.href} href={c.href} title={c.label} className="p-1 text-xl transition-colors">
                                 <span className="text-(--fancy-gradient-1)">{c.icon}</span>
                             </a>
                         ))}

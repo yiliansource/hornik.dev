@@ -1,5 +1,3 @@
-"use client";
-
 import { RevealableSection, SectionHeading } from "@/components/sections";
 import { BsTrophyFill } from "react-icons/bs";
 import { TbLaurelWreathFilled } from "react-icons/tb";

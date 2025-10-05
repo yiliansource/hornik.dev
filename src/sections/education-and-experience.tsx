@@ -1,5 +1,3 @@
-"use client";
-
 import { RevealableSection } from "@/components/sections";
 import { Badge } from "@/components/ui/badge";
 import { labelToColor } from "@/lib/badge-color-lookup";

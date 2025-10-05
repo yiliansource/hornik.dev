@@ -19,6 +19,8 @@ export function ThemeToggle() {
         <AnimatePresence mode="popLayout">
             <motion.button
                 key={String(isDark)}
+                title="Theme Toggle"
+                tabIndex={-1}
                 onClick={toggleTheme}
                 className="text-foreground-silent hover:text-foreground-muted cursor-pointer p-1 text-xl transition-colors"
                 initial={{ scale: 0 }}

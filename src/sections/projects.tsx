@@ -1,10 +1,8 @@
-"use client";
-
+import { RevealableSection, SectionHeading } from "@/components/sections";
 import { Badge } from "@/components/ui/badge";
 import { labelToColor } from "@/lib/badge-color-lookup";
 import clsx from "clsx";
-import { motion, useInView } from "motion/react";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaGithub, FaStar } from "react-icons/fa";
 
 type ProjectInfo = {
@@ -61,30 +59,15 @@ const projects: ProjectInfo[] = [
 ];
 
 export function ProjectsSection() {
-    const section = useRef<HTMLElement | null>(null);
-    const isInView = useInView(section, { amount: 0.2, once: true });
-
     return (
-        <motion.section
-            id="projects"
-            className="flex flex-col gap-12"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: isInView ? 1 : 0 }}
-            transition={{ duration: 1 }}
-            ref={section}
-        >
-            <h1
-                className="top-8 text-5xl font-semibold"
-                // style={{ textShadow: "0px 1px 2px #000, 0px 1px 4px #000, 0px 1px 8px #000" }}
-            >
-                Projects
-            </h1>
-            <div className={clsx("grid grid-cols-1 gap-6", "lg:grid-cols-2 lg:gap-8")}>
+        <RevealableSection id="projects">
+            <SectionHeading>Projects</SectionHeading>
+            <div className={clsx("grid grid-cols-1 gap-6", "md:grid-cols-2 md:gap-8")}>
                 {projects.map((p) => (
                     <ProjectItem key={p.title} data={p} />
                 ))}
             </div>
-        </motion.section>
+        </RevealableSection>
     );
 }
 
@@ -111,7 +94,7 @@ function ProjectItem({ data }: { data: ProjectInfo }) {
     return (
         <div>
             <div className="flex flex-row justify-between">
-                <h3 className="mb-1 text-lg font-semibold">
+                <h2 className="mb-1 text-lg font-semibold">
                     {data.homepage ? (
                         <a className="hover:underline" href={data.homepage} target="_blank">
                             {data.title}
@@ -119,7 +102,7 @@ function ProjectItem({ data }: { data: ProjectInfo }) {
                     ) : (
                         data.title
                     )}
-                </h3>
+                </h2>
                 <div className="flex flex-row items-center gap-4 select-none">
                     {typeof stars === "number" && (
                         <span className="text-foreground-muted flex flex-row items-center gap-1">
@@ -129,7 +112,7 @@ function ProjectItem({ data }: { data: ProjectInfo }) {
                     )}
                     {data.github && (
                         <span className="text-foreground-muted hover:text-foreground text-lg transition-colors">
-                            <a href={data.github} target="_blank">
+                            <a href={data.github} title={data.title + " GitHub"} target="_blank">
                                 <FaGithub />
                             </a>
                         </span>

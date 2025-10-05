@@ -1,5 +1,3 @@
-"use client";
-
 import { SectionHeading } from "@/components/sections";
 import { LightboxImage } from "@/components/ui/lightbox-image";
 import clsx from "clsx";
@@ -9,25 +7,32 @@ import { useRef } from "react";
 const imageColumns: {
     src: string;
     className?: string;
-    alt?: string;
     title?: string;
     description?: React.ReactNode;
 }[][] = [
     [
         {
             src: "/img/artworks/cherry-blossoms.jpg",
+            title: "Cherry Blossoms",
+            description: "Made using Blender.",
         },
 
         {
             src: "/img/artworks/corridor.jpg",
+            title: "Corridor",
+            description: "Made using Blender.",
         },
     ],
     [
         {
             src: "/img/artworks/dining-room.jpg",
+            title: "Dining Room",
+            description: "Made using Blender.",
         },
         {
             src: "/img/artworks/temple.png",
+            title: "Temple",
+            description: "Made using Blender.",
         },
         {
             src: "/img/artworks/in-reactio-veritas.jpg",
@@ -61,7 +66,8 @@ export function ArtworksSection() {
                             <div key={img.src} className={clsx("", img.className)}>
                                 <LightboxImage
                                     src={img.src}
-                                    alt={img.alt}
+                                    alt={img.title}
+                                    name={img.title}
                                     draggable={false}
                                     title={img.title}
                                     description={img.description}

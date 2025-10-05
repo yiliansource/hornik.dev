@@ -74,13 +74,12 @@ export function LightboxImage({
                     !isMobile && "cursor-zoom-in",
                 )}
             >
-                {/* eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text */}
                 <img {...props} ref={srcImageRef} style={{ opacity: isImagePoppedOut ? 0 : 1 }} />
             </motion.div>
             <AnimatePresence>
                 {isLightboxOpen && srcRect && dstRect && (
                     <motion.div
-                        className="fixed top-0 left-0 z-20 h-dvh w-dvw cursor-zoom-out *:cursor-default"
+                        className="fixed top-0 left-0 z-20 h-dvh w-dvw cursor-zoom-out drop-shadow-sm *:cursor-default"
                         initial={{ backdropFilter: "blur(0px)", backgroundColor: "rgb(0, 0, 0, 0)" }}
                         animate={{ backdropFilter: "blur(10px)", backgroundColor: "rgb(0, 0, 0, 0.5)" }}
                         exit={{ backdropFilter: "blur(0px)", backgroundColor: "rgb(0, 0, 0, 0)" }}
@@ -114,7 +113,6 @@ export function LightboxImage({
                                 setImagePoppedOut(visible);
                             }}
                         >
-                            {/* eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text */}
                             <img {...props} />
                         </motion.div>
                         {(title || description) && (
@@ -124,7 +122,7 @@ export function LightboxImage({
                                     left: dstRect.x,
                                     width: dstRect.width,
                                 }}
-                                className="absolute mt-4 p-2"
+                                className="absolute mt-6 text-white"
                                 onClick={(e) => e.stopPropagation()}
                                 variants={{
                                     hidden: { opacity: 0 },
@@ -135,8 +133,8 @@ export function LightboxImage({
                                 animate={showLightboxInfo ? "visible" : "hidden"}
                                 exit="hidden"
                             >
-                                {title && <h1 className="mb-1 text-4xl font-semibold">{title}</h1>}
-                                {description && <div>{description}</div>}
+                                {title && <h1 className="mb-2 text-4xl font-semibold">{title}</h1>}
+                                {description && <div className="text-base text-stone-300">{description}</div>}
                             </motion.div>
                         )}
                     </motion.div>
