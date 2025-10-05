@@ -12,3 +12,7 @@ export function getIsDark() {
 export function applyIsDark(d: boolean) {
     document.documentElement.dataset.dark = String(d);
 }
+
+export function applyTransitions(t: boolean) {
+    document.documentElement.dataset.transitions = String(t);
+}

@@ -13,6 +13,20 @@
         <meta property="og:image" content="/apple-touch-icon.png" />
         <meta property="og:url" content="https://hornik.dev" />
         <meta property="og:type" content="website" />
+
+        <script>
+            (function () {
+                const KEY = "isDark";
+                let dark = false;
+                try {
+                    const v = localStorage.getItem(KEY);
+                    dark = v ? v == "true" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+                } catch (_) {
+                    dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                }
+                document.documentElement.dataset.dark = String(dark);
+            })();
+        </script>
     </head>
     <body>
         <div id="root"></div>

@@ -35,6 +35,10 @@
     --font-mono: var(--font-mono);
 }
 
+:root:not([data-transitions="true"]) * {
+    transition: none !important;
+}
+
 :root[data-dark="true"] {
     --background: #030608;
 
@@ -56,15 +60,15 @@ body {
     scroll-behavior: smooth;
 
     @apply antialiased;
-    @apply transition-colors duration-300;
 }
 
+body,
 p,
 h1,
 h2,
 h3,
 li {
-    @apply transition-colors duration-300;
+    @apply transition-colors duration-200;
 }
 
 .em-v-1 {
