@@ -44,7 +44,7 @@
 
     --foreground: #e1ecf3;
     --foreground-muted: var(--color-neutral-400);
-    --foreground-silent: var(--color-neutral-600);
+    --foreground-silent: var(--color-neutral-500);
 }
 
 html {
