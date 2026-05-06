@@ -6,6 +6,6 @@ Visit it live: [https://hornik.dev](https://hornik.dev)
 
 The miminalist site provides an overview over me, my experience and my projects.
 
-The page is built using Vite, Tailwind CSS and TypeScript.
+The page is built using Vite, TailwindCSS and TypeScript.
 
 Thanks for stopping by! Feel free to fork, star, or reach out.

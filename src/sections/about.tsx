@@ -28,5 +28,5 @@ freelance work occasionally, but mostly build things for fun, experimenting with
 technologies.
 
 I also work as a student employee, mostly tutoring exercise classes, and sometimes I write 
-papers for seminars. A link will be coming soon-ish.`,
+papers for seminars. An archive of things I have written can be found *[here](https://library.hornik.dev)*.`,
 ];

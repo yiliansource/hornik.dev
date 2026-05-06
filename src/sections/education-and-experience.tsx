@@ -104,6 +104,7 @@ following exercise classes:
 - Analysis III (2024W)
 - Functional Analysis (2025S)
 - Analysis I (2025W)
+- Analysis II (2026S)
 
 Additionally, starting from July 2025 I have been *student representative* for the student faculty for 
 mathematics, while continuing to sit on the study commission.`,
